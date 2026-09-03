@@ -2,7 +2,7 @@
 
 Минимальная утилита для Android 8.0+, которая направляет трафик устройства в Charles через локальный VPN и SOCKS5. Основана на [hev-socks5-tunnel](https://github.com/heiher/hev-socks5-tunnel); готовые нативные библиотеки и их происхождение описаны в [NATIVE_BINARIES.md](NATIVE_BINARIES.md).
 
-## Быстрый старт
+## Локальная сборка
 
 Подключите разблокированное устройство с включённым USB debugging и запустите SOCKS5-прокси в Charles на порту `8889`.
 
@@ -24,13 +24,13 @@ cd chunnel
 
 ## Только APK
 
-Репозиторий скачивать не нужно. Поскольку он приватный, сначала авторизуйтесь: `gh auth login`.
+Репозиторий скачивать не нужно.
 
 1. Скачать APK в `Downloads`, установить и выдать разрешение на уведомления:
 
 ```bash
 mkdir -p "$HOME/Downloads"
-gh release download -R griigoriiy/chunnel -p charles-tunnel.apk -D "$HOME/Downloads" --clobber
+curl -fL https://github.com/griigoriiy/chunnel/releases/latest/download/charles-tunnel.apk -o "$HOME/Downloads/charles-tunnel.apk"
 adb install -r "$HOME/Downloads/charles-tunnel.apk"
 adb shell pm grant com.mobileapp.charlestunnel android.permission.POST_NOTIFICATIONS
 ```
@@ -53,7 +53,7 @@ adb reverse --remove tcp:8889
 Те же блоки как aliases для `~/.zshrc` или `~/.bashrc`:
 
 ```bash
-alias chunnel-install='mkdir -p "$HOME/Downloads" && gh release download -R griigoriiy/chunnel -p charles-tunnel.apk -D "$HOME/Downloads" --clobber && adb install -r "$HOME/Downloads/charles-tunnel.apk" && (adb shell pm grant com.mobileapp.charlestunnel android.permission.POST_NOTIFICATIONS 2>/dev/null || true)'
+alias chunnel-install='mkdir -p "$HOME/Downloads" && curl -fL https://github.com/griigoriiy/chunnel/releases/latest/download/charles-tunnel.apk -o "$HOME/Downloads/charles-tunnel.apk" && adb install -r "$HOME/Downloads/charles-tunnel.apk" && (adb shell pm grant com.mobileapp.charlestunnel android.permission.POST_NOTIFICATIONS 2>/dev/null || true)'
 alias chunnel-on='adb reverse tcp:8889 tcp:8889 && adb shell content call --uri content://com.mobileapp.charlestunnel.control --method start --arg 127.0.0.1:8889 >/dev/null && adb shell am start -n com.mobileapp.charlestunnel/.MainActivity >/dev/null'
 alias chunnel-off='adb shell content call --uri content://com.mobileapp.charlestunnel.control --method stop >/dev/null; adb reverse --remove tcp:8889'
 ```
