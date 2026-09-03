@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Charles Tunnel</string>
+    <string name="screen_title">Charles Tunnel</string>
+    <string name="screen_description">Route device traffic through a SOCKS5 proxy.</string>
+    <string name="endpoint_label">SOCKS5 endpoint (host:port)</string>
+    <string name="adb_hint">For Charles over USB: adb reverse tcp:%1$d tcp:&lt;charles-port&gt;</string>
+    <string name="status_format">Status: %1$s</string>
+    <string name="status_idle">Stopped</string>
+    <string name="status_starting">Starting</string>
+    <string name="status_running">Running</string>
+    <string name="status_stopping">Stopping</string>
+    <string name="status_error">Error</string>
+    <string name="action_start">Start</string>
+    <string name="action_stop">Stop</string>
+    <string name="vpn_permission_denied">VPN permission was denied.</string>
+    <string name="notification_permission_denied">Allow notifications for Charles Tunnel in system settings before starting the VPN.</string>
+    <string name="invalid_endpoint">Enter an endpoint as host:port or [IPv6]:port.</string>
+    <string name="invalid_host">Enter a valid IPv4, IPv6 or hostname.</string>
+    <string name="invalid_port">Port must be between 1 and 65535.</string>
+    <string name="notification_channel_name">Tunnel status</string>
+    <string name="notification_title">Charles Tunnel is active</string>
+    <string name="notification_text">SOCKS5 proxy: %1$s</string>
+    <string name="tunnel_establish_failed">Could not create the device VPN interface.</string>
+    <string name="tunnel_native_failed">The native tunnel failed (code %1$d).</string>
+</resources>

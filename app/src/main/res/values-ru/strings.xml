@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Charles Tunnel</string>
+    <string name="screen_title">Charles Tunnel</string>
+    <string name="screen_description">Перенаправляет трафик устройства в SOCKS5-прокси.</string>
+    <string name="endpoint_label">SOCKS5 endpoint (host:port)</string>
+    <string name="adb_hint">Для Charles через USB: adb reverse tcp:%1$d tcp:&lt;порт-charles&gt;</string>
+    <string name="status_format">Состояние: %1$s</string>
+    <string name="status_idle">Остановлен</string>
+    <string name="status_starting">Запускается</string>
+    <string name="status_running">Работает</string>
+    <string name="status_stopping">Останавливается</string>
+    <string name="status_error">Ошибка</string>
+    <string name="action_start">Запустить</string>
+    <string name="action_stop">Остановить</string>
+    <string name="vpn_permission_denied">Нет разрешения на создание VPN.</string>
+    <string name="notification_permission_denied">Перед запуском VPN разрешите уведомления для Charles Tunnel в системных настройках.</string>
+    <string name="invalid_endpoint">Укажите адрес как host:port или [IPv6]:port.</string>
+    <string name="invalid_host">Укажите корректный IPv4, IPv6 или hostname.</string>
+    <string name="invalid_port">Порт должен быть от 1 до 65535.</string>
+    <string name="notification_channel_name">Состояние туннеля</string>
+    <string name="notification_title">Charles Tunnel работает</string>
+    <string name="notification_text">SOCKS5-прокси: %1$s</string>
+    <string name="tunnel_establish_failed">Не удалось создать VPN-интерфейс устройства.</string>
+    <string name="tunnel_native_failed">Ошибка нативного туннеля (код %1$d).</string>
+</resources>
