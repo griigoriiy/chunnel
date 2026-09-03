@@ -22,6 +22,42 @@ cd chunnel
 ./disable.sh
 ```
 
+## Только APK
+
+Репозиторий скачивать не нужно. Поскольку он приватный, сначала авторизуйтесь: `gh auth login`.
+
+1. Скачать APK в `Downloads`, установить и выдать разрешение на уведомления:
+
+```bash
+mkdir -p "$HOME/Downloads"
+gh release download -R griigoriiy/chunnel -p charles-tunnel.apk -D "$HOME/Downloads" --clobber
+adb install -r "$HOME/Downloads/charles-tunnel.apk"
+adb shell pm grant com.mobileapp.charlestunnel android.permission.POST_NOTIFICATIONS
+```
+
+2. Настроить проброс и запустить туннель:
+
+```bash
+adb reverse tcp:8889 tcp:8889
+adb shell content call --uri content://com.mobileapp.charlestunnel.control --method start --arg 127.0.0.1:8889 >/dev/null
+adb shell am start -n com.mobileapp.charlestunnel/.MainActivity >/dev/null
+```
+
+3. Остановить туннель и удалить проброс:
+
+```bash
+adb shell content call --uri content://com.mobileapp.charlestunnel.control --method stop >/dev/null
+adb reverse --remove tcp:8889
+```
+
+Те же блоки как aliases для `~/.zshrc` или `~/.bashrc`:
+
+```bash
+alias chunnel-install='mkdir -p "$HOME/Downloads" && gh release download -R griigoriiy/chunnel -p charles-tunnel.apk -D "$HOME/Downloads" --clobber && adb install -r "$HOME/Downloads/charles-tunnel.apk" && (adb shell pm grant com.mobileapp.charlestunnel android.permission.POST_NOTIFICATIONS 2>/dev/null || true)'
+alias chunnel-on='adb reverse tcp:8889 tcp:8889 && adb shell content call --uri content://com.mobileapp.charlestunnel.control --method start --arg 127.0.0.1:8889 >/dev/null && adb shell am start -n com.mobileapp.charlestunnel/.MainActivity >/dev/null'
+alias chunnel-off='adb shell content call --uri content://com.mobileapp.charlestunnel.control --method stop >/dev/null; adb reverse --remove tcp:8889'
+```
+
 <details>
 <summary>Ручная установка</summary>
 
